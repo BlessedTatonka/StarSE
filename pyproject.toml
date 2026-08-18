@@ -1,0 +1,51 @@
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "starse-training"
+version = "0.1.0"
+description = "Reproducible training pipeline for StaRSE Russian static sentence embeddings"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+license = {text = "Apache-2.0"}
+authors = [{name = "Boris Malashenko"}]
+dependencies = [
+  "accelerate==1.13.0",
+  "datasets==4.8.5",
+  "huggingface-hub==1.16.4",
+  "numpy==2.2.2",
+  "pyarrow==24.0.0",
+  "PyYAML==6.0.2",
+  "safetensors==0.7.0",
+  "scikit-learn==1.8.0",
+  "sentence-transformers==5.5.1",
+  "tokenizers==0.22.2",
+  "torch==2.6.0",
+  "transformers==5.3.0",
+]
+
+[project.urls]
+Model = "https://huggingface.co/BorisTM/starse"
+Repository = "https://github.com/BlessedTatonka/StarSE"
+
+[project.optional-dependencies]
+dev = [
+  "pytest==8.4.2",
+  "ruff==0.12.12",
+]
+
+[project.scripts]
+starse-init = "starse.init_model:main"
+starse-train = "starse.train:main"
+starse-project = "starse.project:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/starse"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

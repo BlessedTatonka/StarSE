@@ -1,0 +1,38 @@
+run_name: starse-contrastive
+objective: contrastive
+seed: 20260509
+primary_dataset: cultura_ru
+
+# All paths are relative to --data-root.
+sources:
+  - name: cultura_ru
+    parquet: cultura_ru/*.parquet
+    max_rows: 100000000
+  - name: mmarco_ru
+    parquet: mmarco_ru/*.parquet
+  - name: ru_hnp
+    parquet: ru_hnp/*.parquet
+  - name: ru_paraphrase_nmt_leipzig
+    parquet: ru_paraphrase_nmt_leipzig/*.parquet
+
+loss:
+  scale: 20.0
+
+training:
+  max_steps: 20000
+  per_device_train_batch_size: 16384
+  per_device_eval_batch_size: 256
+  gradient_accumulation_steps: 1
+  learning_rate: 0.002
+  weight_decay: 0.05
+  warmup_steps: 1000
+  lr_scheduler_type: warmup_stable_decay
+  lr_scheduler_kwargs:
+    num_decay_steps: 1
+    min_lr_ratio: 0.0
+  eval_steps: 1000
+  save_steps: 1000
+  logging_steps: 50
+  dataloader_num_workers: 0
+  dataloader_drop_last: true
+  bf16: true

@@ -1,0 +1,16 @@
+.git
+.github
+.venv
+__pycache__
+.pytest_cache
+.ruff_cache
+data
+outputs
+checkpoints
+artifacts
+logs
+*.parquet
+*.arrow
+*.safetensors
+*.pt
+*.pth

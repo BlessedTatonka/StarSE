@@ -1,0 +1,37 @@
+run_name: starse-sign-projected
+objective: sign_projected
+seed: 20260509
+primary_dataset: cultura_ru
+
+sources:
+  - name: cultura_ru
+    parquet: cultura_ru/*.parquet
+    max_rows: 45000000
+
+# Selected configuration of the final 51.16 RuMTEB run.
+loss:
+  scale: 20.0
+  pair_weight: 0.17265503466984508
+  teacher_kl_weight: 1.140870354678197
+  cube_weight: 0.00010676462029175317
+  balance_weight: 0.000004463908616416189
+  independence_weight: 0.0000005989513653025522
+  unit_prior_weight: 0.0007888316167086369
+  regularizer_sample_size: 8192
+
+training:
+  max_steps: 10000
+  per_device_train_batch_size: 16384
+  per_device_eval_batch_size: 256
+  gradient_accumulation_steps: 1
+  learning_rate: 0.0037713929358631606
+  weight_decay: 0.05
+  warmup_steps: 0
+  lr_scheduler_type: linear
+  lr_scheduler_kwargs: {}
+  eval_steps: 1000
+  save_steps: 1000
+  logging_steps: 50
+  dataloader_num_workers: 0
+  dataloader_drop_last: false
+  bf16: true
